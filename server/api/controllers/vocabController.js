@@ -4,12 +4,18 @@ const axios = require('axios');
 
 exports.tts_proxy = async (req, res) => {
     try {
-        const text = req.body.text;
+        let text = req.body.text;
         console.log('TTS Request Text:', text);
         console.log('API Key present:', !!process.env.FPT_AI_API_KEY);
 
         if (!text) {
             return res.status(400).json({ message: 'Text is required' });
+        }
+
+        // Fix for short words (FPT.AI requires >= 3 chars)
+        if (text.length < 3) {
+             text = text + '...'; 
+             console.log('Text padded to:', `"${text}"`);
         }
 
         const response = await axios.post('https://api.fpt.ai/hmi/tts/v5', text, {

@@ -15,7 +15,21 @@ async function run() {
       { english: 'book', german: 'Buch', vietnamese: 'sách' },
       { english: 'house', german: 'Haus', vietnamese: 'nhà' },
       { english: 'water', german: 'Wasser', vietnamese: ' nước' },
-      { english: 'school', german: 'Schule', vietnamese: 'trường học' }
+      { english: 'school', german: 'Schule', vietnamese: 'trường học' },
+      { english: 'cat', german: 'Katze', vietnamese: 'mèo' },
+      { english: 'dog', german: 'Hund', vietnamese: 'chó' },
+      { english: 'tree', german: 'Baum', vietnamese: 'cây' },
+      { english: 'flower', german: 'Blume', vietnamese: 'hoa' },
+      { english: 'car', german: 'Auto', vietnamese: 'xe' },
+      { english: 'bus', german: 'Bus', vietnamese: 'xe bus' },
+      { english: 'train', german: 'Zug', vietnamese: 'xe tàu' },
+      { english: 'plane', german: 'Flugzeug', vietnamese: 'máy bay' },
+      { english: 'train', german: 'Zug', vietnamese: 'xe tàu' },
+      { english: 'plane', german: 'Flugzeug', vietnamese: 'máy bay' },
+      { english: 'ship', german: 'Schiff', vietnamese: ' tàu' },
+      { english: 'mouse', german: 'Maus', vietnamese: ' chuột' },
+      { english: 'keyboard', german: 'Tastatur', vietnamese: 'bàn phím' },
+      { english: 'mouse', german: 'Maus', vietnamese: ' chuột' },
     ];
     const result = await Vocab.insertMany(docs, { ordered: true });
     console.log(`Seeded ${result.length} documents.`);
