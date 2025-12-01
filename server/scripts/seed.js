@@ -6,12 +6,16 @@ const Vocab = require('../api/models/vocabModel');
 async function run() {
   try {
     await mongoose.connect(process.env.CONNECTION_STRING);
+    
+    // Xóa dữ liệu cũ trước khi seed
+    await Vocab.deleteMany({});
+    
     const docs = [
-      { english: 'apple', german: 'Apfel' },
-      { english: 'book', german: 'Buch' },
-      { english: 'house', german: 'Haus' },
-      { english: 'water', german: 'Wasser' },
-      { english: 'school', german: 'Schule' }
+      { english: 'apple', german: 'Apfel', vietnamese: 'táo' },
+      { english: 'book', german: 'Buch', vietnamese: 'sách' },
+      { english: 'house', german: 'Haus', vietnamese: 'nhà' },
+      { english: 'water', german: 'Wasser', vietnamese: ' nước' },
+      { english: 'school', german: 'Schule', vietnamese: 'trường học' }
     ];
     const result = await Vocab.insertMany(docs, { ordered: true });
     console.log(`Seeded ${result.length} documents.`);
