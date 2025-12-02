@@ -5,19 +5,13 @@ const axios = require('axios');
 exports.tts_proxy = async (req, res) => {
     try {
         let text = req.body.text;
-        console.log('TTS Request Text:', text);
-        console.log('API Key present:', !!process.env.FPT_AI_API_KEY);
-
         if (!text) {
             return res.status(400).json({ message: 'Text is required' });
         }
-
         // Fix for short words (FPT.AI requires >= 3 chars)
         if (text.length < 3) {
              text = text + '...'; 
-             console.log('Text padded to:', `"${text}"`);
         }
-
         const response = await axios.post('https://api.fpt.ai/hmi/tts/v5', text, {
             headers: {
                 'api-key': process.env.FPT_AI_API_KEY,
@@ -26,16 +20,9 @@ exports.tts_proxy = async (req, res) => {
                 'format': 'mp3'
             }
         });
-
-        console.log('FPT AI Response:', response.data);
         res.json(response.data);
     } catch (err) {
-        console.error('TTS Proxy Error:', err.message);
-        if (err.response) {
-            console.error('FPT AI Error Data:', err.response.data);
-            console.error('FPT AI Error Status:', err.response.status);
-        }
-        res.status(500).json({ message: 'Failed to fetch TTS', error: err.message });
+        res.status(500).send(err);
     }
 };
 
