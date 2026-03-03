@@ -35,6 +35,10 @@ app.use(bodyParser.json());
 
 routes(app); //register the route
 
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
+
 if (process.env.NODE_ENV !== 'production') {
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
