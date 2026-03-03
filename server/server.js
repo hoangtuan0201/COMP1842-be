@@ -14,7 +14,22 @@ mongoose.connect(process.env.CONNECTION_STRING);
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+    'http://localhost:8080',
+    'http://localhost:3000',
+    'https://comp1842-fe.onrender.com'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
